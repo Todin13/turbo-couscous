@@ -12,5 +12,7 @@ This project is in build but we want it to be able to do :
  - [ ] Take voice command
  - [ ] Work in English and French
 
-# MVC Diagram :
+## How does it work :
+### UML Diagram :
+### MVC Diagram :
 ![MVC Diagram](https://github.com/Todin13/turbo-couscous/blob/main/preview_img/Java_ChatBot_MVC.png)
