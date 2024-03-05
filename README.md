@@ -19,3 +19,6 @@ This project is in build but we want it to be able to do :
 
 ### Use Case Diagram :
 ![Use case Diagram](https://github.com/Todin13/turbo-couscous/blob/main/preview_img/Use_case_diagram.png)
+
+### Use Case Diagram :
+![Sequence Diagram](https://github.com/Todin13/turbo-couscous/blob/main/preview_img/Sequence_diagram.png)
