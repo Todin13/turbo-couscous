@@ -18,4 +18,4 @@ This project is in build but we want it to be able to do :
 ![MVC Diagram](https://github.com/Todin13/turbo-couscous/blob/main/preview_img/Java_ChatBot_MVC.png)
 
 ### Use Case Diagram :
-![Use case Diagram](https://github.com/Todin13/turbo-couscous/blob/main/preview_img/Use case diagram.png)
+![Use case Diagram](https://github.com/Todin13/turbo-couscous/blob/main/preview_img/Use_case_diagram.png)
