@@ -8,7 +8,6 @@ This project is in build but we want it to be able to do :
  - [ ] Taking rendez-vous in you place
  - [ ] Give weather forecast 
  - [ ] Send e-mail
- - [ ] Start application
  - [ ] Domotic control 
  - [ ] Take voice command
  - [ ] Work in English and French
