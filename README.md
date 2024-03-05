@@ -1,2 +1,2 @@
 # turbo-couscous
-A chat bot project made in java. 
+An AI assistant (chat bot) project made in java. 
