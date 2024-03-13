@@ -7,9 +7,9 @@ public class TaskControllerTest {
         TaskController taskController = new TaskController();
 
         // Simulate user input
-        String userInputGreeting = "Hello, how are you?";
-        String userInputSchedule = "I need to put an appointment.";
-        String userInputUnknown = "Tell me something about quantum physics.";
+        String userInputGreeting = "Hello";
+        String userInputSchedule = "help to schedule appointment.";
+        String userInputUnknown = "bye bye";
 
         // Process the input and print the responses
         System.out.println("User Input: " + userInputGreeting);

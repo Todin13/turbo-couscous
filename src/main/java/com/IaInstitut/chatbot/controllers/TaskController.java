@@ -14,19 +14,25 @@ public class TaskController {
         NlpResult nlpResult = modelController.processUserInput(userInput);
         String response;
 
-        switch (nlpResult.getIntent()) {
-            case "greeting":
-                response = "Hello! I'm fine, thank you. How can I help you today?";
-                break;
-            case "scheduleAppointment":
-                response = "I can help with that. What day would you like to schedule the appointment for?";
-                break;
-            case "physicsInfo":
-                response = "Quantum physics explores the behavior of matter and energy at the smallest scales. It's quite fascinating!";
-                break;
-            default:
-                response = "I'm not sure I understand. Could you please provide more details or ask another question?";
-                break;
+        // Check if the intent is directly mapped to a response
+        if ("responseFromDataset".equals(nlpResult.getIntent())) {
+            // When the intent is a generic placeholder for dataset responses,
+            // retrieve the actual response directly from the NlpResult's details.
+            response = nlpResult.getEntities().getOrDefault("response", new String[]{"I'm not sure how to help with that."})[0];
+        } else {
+            // Handle predefined intents with custom responses
+            switch (nlpResult.getIntent()) {
+                case "scheduleAppointment":
+                    response = "I can help with that. What day would you like to schedule the appointment for?";
+                    break;
+                case "sendEmail":
+                    response = "Sure, I can assist with sending an email. What would you like to include in the message?";
+                    break;
+                // Include other predefined intents as needed
+                default:
+                    response = "I'm not sure I understand. Could you please provide more details or ask another question?";
+                    break;
+            }
         }
         return response;
     }
