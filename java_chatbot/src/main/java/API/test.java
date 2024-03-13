@@ -98,8 +98,7 @@ public class test {
     private static void printHourlyForecast(Map<String, Map<String, Object>> weatherForecast) {
         // Print the header
         System.out.println("Hourly Forecast:");
-        System.out.printf("%-20s %-15s %-25s %-25s %-25s %-25s\n", "Time", "Temperature (°C)", "Humidity (%)", "Apparent Temperature (°C)", "Precipitation Probability (%)", "Precipitation (mm)");
-    
+        
         // Iterate over each time slot
         for (Map.Entry<String, Map<String, Object>> entry : weatherForecast.entrySet()) {
             String time = entry.getKey();
