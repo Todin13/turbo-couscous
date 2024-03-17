@@ -3,6 +3,10 @@ package com.IaInstitut.chatbot.controllers;
 import com.IaInstitut.chatbot.model.ModelController;
 import com.IaInstitut.chatbot.model.NlpResult;
 import com.IaInstitut.chatbot.service.EmailSender;
+import com.IaInstitut.chatbot.service.IPandLocationResolver;
+import com.IaInstitut.chatbot.service.weatherApi;
+
+import java.util.Map;
 // Import the EmailSender class here
 
 public class TaskController {
@@ -55,6 +59,40 @@ public class TaskController {
             response = nlpResult.getEntities().getOrDefault("response", new String[]{"I'm not sure how to help with that."})[0];
         } else {
             switch (nlpResult.getIntent()) {
+                case "weatherForecast":
+                    // Assuming IPandLocationResolver and weatherApi are properly set up
+                    String[] ipAndLocation = IPandLocationResolver.getIPAndLocation();
+                    String latitude = ipAndLocation[2];
+                    String longitude = ipAndLocation[3];
+
+                    // Fetch weather forecast using the location
+                    Map<String, Map<String, String>> weatherForecast = weatherApi.getWeatherForecast(latitude, longitude);
+
+                    // Check if the weather forecast is not null and print it out for debugging
+                    if (weatherForecast != null) {
+                        System.out.println("Weather Forecast Map: " + weatherForecast);
+                        Map<String, String> currentWeather = weatherForecast.get("current");
+
+                        // Check if the current weather map is not null
+                        if (currentWeather != null) {
+                            String temperature = currentWeather.get("temperature");
+                            String condition = currentWeather.get("condition");
+                            String humidity = currentWeather.get("humidity");
+                            String windSpeed = currentWeather.get("windSpeed");
+
+                            // Format the forecast into a response if all values are available
+                            if (temperature != null && condition != null && humidity != null && windSpeed != null) {
+                                response = String.format("Current weather: Temperature is %s, condition is %s, humidity is %s%%, wind speed is %s km/h.", temperature, condition, humidity, windSpeed);
+                            } else {
+                                response = "Unable to retrieve some weather details.";
+                            }
+                        } else {
+                            response = "Current weather information is unavailable.";
+                        }
+                    } else {
+                        response = "Weather forecast data is unavailable.";
+                    }
+                    break;
                 case "scheduleAppointment":
                     response = "I can help with that. What day would you like to schedule the appointment for?";
                     break;

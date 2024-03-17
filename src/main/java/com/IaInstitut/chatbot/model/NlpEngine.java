@@ -90,15 +90,18 @@ public class NlpEngine {
     }
 
     private String determineIntent(String[] tokens) {
-        for (String token : tokens) { if (token.matches("schedule|appointment")) {
+        for (String token : tokens) {
+            if (token.matches("schedule|appointment")) {
                 return "scheduleAppointment";
             } else if (token.toLowerCase().contains("email")) {
                 return "sendEmail";
+            } else if (token.toLowerCase().matches("weather|forecast|temperature")) {
+                return "weatherForecast";
             }
-            // Add more patterns or intents as needed
         }
         return "unknown";
     }
+
 
     private String queryDatasetForIntent(String input) {
         // Normalize the input: lowercase and remove punctuation.
