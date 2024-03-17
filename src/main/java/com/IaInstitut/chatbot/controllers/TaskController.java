@@ -5,7 +5,7 @@ import com.IaInstitut.chatbot.model.NlpResult;
 
 public class TaskController {
     private final ModelController modelController;
-
+    private String lastIntent = null;
     public TaskController() {
         this.modelController = new ModelController();
     }
@@ -34,6 +34,7 @@ public class TaskController {
                     break;
             }
         }
+        lastIntent = nlpResult.getIntent();
         return response;
     }
 }
