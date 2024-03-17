@@ -65,33 +65,33 @@ public class TaskController {
                     String latitude = ipAndLocation[2];
                     String longitude = ipAndLocation[3];
 
-                    // Fetch weather forecast using the location
+                    // Assume that the weather forecast data is a Map with keys as timestamps
                     Map<String, Map<String, String>> weatherForecast = weatherApi.getWeatherForecast(latitude, longitude);
 
-                    // Check if the weather forecast is not null and print it out for debugging
-                    if (weatherForecast != null) {
-                        System.out.println("Weather Forecast Map: " + weatherForecast);
-                        Map<String, String> currentWeather = weatherForecast.get("current");
+// Print the forecast for debugging purposes
+                    System.out.println("Weather Forecast Map: " + weatherForecast);
 
-                        // Check if the current weather map is not null
-                        if (currentWeather != null) {
-                            String temperature = currentWeather.get("temperature");
-                            String condition = currentWeather.get("condition");
-                            String humidity = currentWeather.get("humidity");
-                            String windSpeed = currentWeather.get("windSpeed");
+// Attempt to find the current weather details
+                    String currentWeatherKey = findCurrentWeatherKey(weatherForecast);
+                    if (currentWeatherKey != null) {
+                        Map<String, String> currentWeather = weatherForecast.get(currentWeatherKey);
 
-                            // Format the forecast into a response if all values are available
-                            if (temperature != null && condition != null && humidity != null && windSpeed != null) {
-                                response = String.format("Current weather: Temperature is %s, condition is %s, humidity is %s%%, wind speed is %s km/h.", temperature, condition, humidity, windSpeed);
-                            } else {
-                                response = "Unable to retrieve some weather details.";
-                            }
+                        String temperature = currentWeather.get("temperature_2m");
+                        String humidity = currentWeather.get("relative_humidity_2m");
+                        String cloudCover = currentWeather.get("cloud_cover_low");
+                        String pressure = currentWeather.get("surface_pressure");
+
+                        if (temperature != null && humidity != null && cloudCover != null && pressure != null) {
+                            response = String.format("Current weather: Temperature is %s°C, humidity is %s%%, cloud cover is %s%%, surface pressure is %s hPa.",
+                                    temperature, humidity, cloudCover, pressure);
                         } else {
-                            response = "Current weather information is unavailable.";
+                            response = "Some weather details are not available.";
                         }
                     } else {
-                        response = "Weather forecast data is unavailable.";
+                        response = "Current weather information is not available.";
                     }
+
+
                     break;
                 case "scheduleAppointment":
                     response = "I can help with that. What day would you like to schedule the appointment for?";
@@ -106,5 +106,16 @@ public class TaskController {
         }
 
         return response;
+    }
+
+    // Helper method to find the key for the current weather
+    private String findCurrentWeatherKey(Map<String, Map<String, String>> weatherForecast) {
+        // This method should implement the logic to find the closest timestamp key
+        // to the current time. For now, we'll just take the first key as an example.
+        if (weatherForecast != null && !weatherForecast.isEmpty()) {
+            // You can also add more logic here to find the exact key for the current time
+            return weatherForecast.keySet().iterator().next();
+        }
+        return null;
     }
 }
