@@ -83,7 +83,7 @@ public class GmailSend {
         conn.disconnect();
     }
 
-    public static void main(String to, String subject, String body,) {
+    public static void main(String to, String subject, String body) {
         // String to = "recipient@example.com";
         // String subject = "Test Email";
         // String body = "This is a test email sent using the Gmail API without external libraries.";
