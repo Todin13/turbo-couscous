@@ -20,7 +20,7 @@ public class GoogleAuth {
     private static final String CLIENT_ID = "446973941336-5se3jchk07hrna6b436rum3dscd4pg8r.apps.googleusercontent.com";
     private static final String CLIENT_SECRET = "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";
     private static final String REDIRECT_URI = "http://localhost:8080/Callback";
-    private static final String SCOPE = "openid email profile"; // Add required scopes
+    private static final String SCOPE = "openid email profile https://mail.google.com/"; // Add required scopes
 
     public Map<String, String> getAccessToken(String authorizationCode) {
         try {
