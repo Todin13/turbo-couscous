@@ -12,6 +12,8 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GoogleAuth {
 
@@ -20,7 +22,7 @@ public class GoogleAuth {
     private static final String REDIRECT_URI = "http://localhost:8080/Callback";
     private static final String SCOPE = "openid email profile"; // Add required scopes
 
-    public String getAccessToken(String authorizationCode) {
+    public Map<String, String> getAccessToken(String authorizationCode) {
         try {
             String tokenUrl = "https://oauth2.googleapis.com/token";
             String params = "code=" + URLEncoder.encode(authorizationCode, StandardCharsets.UTF_8)
@@ -52,7 +54,21 @@ public class GoogleAuth {
                 
                 if (jsonResponse.contains("\"access_token\":")) {
                     String accessToken = jsonResponse.split("\"access_token\":")[1].split("\"")[1];
-                    return accessToken;
+                    String expireIn = jsonResponse.split("\"expires_in\":")[1].split("\"")[1];
+                    String refreshToken = jsonResponse.split("\"refresh_token\":")[1].split("\"")[1];
+                    String scope = jsonResponse.split("\"scope\":")[1].split("\"")[1];
+                    String tokenType = jsonResponse.split("\"token_type\":")[1].split("\"")[1];
+                    String idToken = jsonResponse.split("\"id_token\":")[1].split("\"")[1];
+                    
+                    Map<String, String> allTokenInfo = new HashMap<>();
+                    allTokenInfo.put("accessToken", accessToken);
+                    allTokenInfo.put("expireIn", expireIn);
+                    allTokenInfo.put("refreshToken", refreshToken);
+                    allTokenInfo.put("scope", scope);
+                    allTokenInfo.put("tokenType", tokenType);
+                    allTokenInfo.put("idToken", idToken);
+                    
+                    return allTokenInfo;
                 } else {
                     System.err.println("Access token not found in JSON response.");
                     System.out.println(jsonResponse);
@@ -146,11 +162,11 @@ public class GoogleAuth {
     
                 // Get the access token using the authorization code
                 GoogleAuth googleAuth = new GoogleAuth();
-                String accessToken = googleAuth.getAccessToken(authorizationCode);
+                Map<String, String> accessToken = googleAuth.getAccessToken(authorizationCode);
     
                 if (accessToken != null && !accessToken.isEmpty()) {
                     // Access token obtained successfully
-                    System.out.println("Access token obtained successfully: " + accessToken);
+                    System.out.println("Access token obtained successfully: " + accessToken.get("accessToken"));
                     // You can perform further actions here
                 } else {
                     // Access token retrieval failed
