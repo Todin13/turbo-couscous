@@ -69,8 +69,8 @@ public class GoogleAuth {
             return null;
         }
     }  
-    
-    public static void main(String[] args) {
+
+    public static String getAuthenticationCode() {
         try {
             // Start a local HTTP server to handle the callback
             ServerSocket serverSocket = new ServerSocket(8080);
@@ -115,19 +115,13 @@ public class GoogleAuth {
                 int endIndex = decodedUrl.indexOf("&", startIndex);
                 String authorizationCode = endIndex != -1 ? decodedUrl.substring(startIndex, endIndex) : decodedUrl.substring(startIndex);
 
-                System.out.println("Authorization code received: " + authorizationCode.trim()); // Print the received authorization code
+                // Close connections
+                in.close();
+                out.close();
+                clientSocket.close();
+                serverSocket.close();
 
-                // Get access token using the received authorization code
-                GoogleAuth googleAuth = new GoogleAuth();
-                String accessToken = googleAuth.getAccessToken(authorizationCode);
-                if (accessToken != null && !accessToken.isEmpty()) {
-                    // Access token obtained successfully
-                    System.out.println("Access token obtained successfully: " + accessToken);
-                    // You can perform further actions here
-                } else {
-                    // Access token retrieval failed
-                    System.out.println("Access token retrieval failed.");
-                }
+                return authorizationCode.trim(); // Return the received authorization code
             } else {
                 System.err.println("Authorization code not found in the URL.");
             }
@@ -140,5 +134,34 @@ public class GoogleAuth {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null; // Return null if there's an error or if the code cannot be retrieved
     }
+    
+    public static void main(String[] args) {
+        try {
+            // Get the authorization code
+            String authorizationCode = getAuthenticationCode();
+            if (authorizationCode != null && !authorizationCode.isEmpty()) {
+                System.out.println("Authorization code received: " + authorizationCode);
+    
+                // Get the access token using the authorization code
+                GoogleAuth googleAuth = new GoogleAuth();
+                String accessToken = googleAuth.getAccessToken(authorizationCode);
+    
+                if (accessToken != null && !accessToken.isEmpty()) {
+                    // Access token obtained successfully
+                    System.out.println("Access token obtained successfully: " + accessToken);
+                    // You can perform further actions here
+                } else {
+                    // Access token retrieval failed
+                    System.out.println("Access token retrieval failed.");
+                }
+            } else {
+                // Authorization code retrieval failed
+                System.out.println("Authorization code retrieval failed.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    } 
 }
