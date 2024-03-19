@@ -4,7 +4,6 @@
    "tag": "greeting",
    "patterns": [
       "Hi",
-      "How are you?",
       "Is anyone there?",
       "Hello",
       "Good day",
@@ -12,6 +11,7 @@
       "how are ya",
       "heyy",
       "whatsup",
+      "hey",
       "??? ??? ??"
    ],
    "responses": [
@@ -98,26 +98,26 @@
  {
    "tag": "hours",
    "patterns": [
-      "timing of college",
-      "what is college timing",
+      "timing of university",
+      "what is university timing",
       "working days",
       "when are you guys open",
       "what are your hours",
       "hours of operation",
-      "when is the college open",
-      "college timing",
-      "what about college timing",
-      "is college open on saturday",
-      "tell something about college timing",
-      "what is the college  hours",
-      "when should i come to college",
-      "when should i attend college",
-      "what is my college time",
-      "college timing",
-      "timing college"
+      "when is the university open",
+      "university timing",
+      "what about university timing",
+      "is university open on saturday",
+      "tell something about university timing",
+      "what is the university  hours",
+      "when should i come to university",
+      "when should i attend university",
+      "what is my university time",
+      "university timing",
+      "timing university"
    ],
    "responses": [
-      "College is open 8am-5pm Monday-Saturday!"
+      "University is open 8am-5pm Monday-Saturday!"
    ],
    "context_set": ""
 },
@@ -126,13 +126,13 @@
    "patterns": [
       "more info",
       "contact info",
-      "how to contact college",
-      "college telephone number",
-      "college number",
+      "how to contact university",
+      "university telephone number",
+      "university number",
       "What is your contact no",
       "Contact number?",
       "how to call you",
-      "College phone no?",
+      "university phone no?",
       "how can i contact you",
       "Can i get your phone number",
       "how can i call you",
@@ -141,7 +141,7 @@
       "call"
    ],
    "responses": [
-      "You can contact at: NUMBER"
+      "You can contact at: 01 84 07 16 46 "
    ],
    "context_set": ""
 },
@@ -151,14 +151,14 @@
       "list of courses",
       "list of courses offered",
       "list of courses offered in",
-      "what are the courses offered in your college?",
+      "what are the courses offered in your university?",
       "courses?",
       "courses offered",
       "courses offered in (your univrsity(UNI) name)",
       "courses you offer",
       "branches?",
       "courses available at UNI?",
-      "branches available at your college?",
+      "branches available at your university?",
       "what are the courses in UNI?",
       "what are branches in UNI?",
       "what are courses in UNI?",
@@ -177,7 +177,7 @@
       "Civil engineering"
    ],
    "responses": [
-      "Our university offers Information Technology, computer Engineering, Mechanical engineering,Chemical engineering, Civil engineering and extc Engineering."
+      "Our university offers Information Technology, computer Engineering, it combine technological expertise, management and humanism."
    ],
    "context_set": ""
 },
@@ -187,7 +187,7 @@
       "information about fee",
       "information on fee",
       "tell me the fee",
-      "college fee",
+      "university fee",
       "fee per semester",
       "what is the fee of each semester",
       "what is the fees of each year",
@@ -209,73 +209,21 @@
       "fees for non-Ac room for boys"
    ],
    "responses": [
-      "For Fee detail visit <a target=\"_blank\" href=\"LINK\"> here</a>"
+      "For Fee detail visit <a target=\"_blank\" href=\"https://www.ia-institut.fr/ecole-intelligence-artificielle/demande-documentation/\"> here</a>"
    ],
    "context_set": ""
 },
- {
-   "tag": "location",
-   "patterns": [
-      "where is the college located",
-      "college is located at",
-      "where is college",
-      "where is college located",
-      "address of college",
-      "how to reach college",
-      "college location",
-      "college address",
-      "wheres the college",
-      "how can I reach college",
-      "whats is the college address",
-      "what is the address of college",
-      "address",
-      "location"
-   ],
-   "responses": [
-      "<a target=\"_blank\" href=\"ADD YOU GOOGLE MAP LINK HERE\"> here</a>"
-   ],
-   "context_set": ""
-},
- {
-   "tag": "hostel",
-   "patterns": [
-      "hostel facility",
-      "hostel servive",
-      "hostel location",
-      "hostel address",
-      "hostel facilities",
-      "hostel fees",
-      "Does college provide hostel",
-      "Is there any hostel",
-      "Where is hostel",
-      "do you have hostel",
-      "do you guys have hostel",
-      "hostel",
-      "hostel capacity",
-      "what is the hostel fee",
-      "how to get in hostel",
-      "what is the hostel address",
-      "how far is hostel from college",
-      "hostel college distance",
-      "where is the hostel",
-      "how big is the hostel",
-      "distance between college and hostel",
-      "distance between hostel and college"
-   ],
-   "responses": [
-      "For hostel detail visit <a target=\"_blank\" href=\"ADD YOUR HOSTEL DETAIL PDF LINK OR ANY INFORMATION LINK OR ADD YOU OWN ANSWERS\"> here</a>"
-   ],
-   "context_set": ""
-},
+ 
+ 
  {
    "tag": "event",
    "patterns": [
       "events organised",
       "list of events",
-      "list of events organised in college",
-      "list of events conducted in college",
-      "What events are conducted in college",
-      "Are there any event held at college",
+      "list of events organised",
+      "list of events conducted",
+      "What events are conducted",
+      "Are there any event held ",
       "Events?",
       "functions",
       "what are the events",
@@ -283,45 +231,24 @@
       "what about events"
    ],
    "responses": [
-      "For event detail visit <a target=\"_blank\" href=\"ADD YOUR FUNCTIONS LINK OR YOUR OWN RESPONSE\"> here</a>"
+      "For event detail visit <a target=\"_blank\" href=\"https://www.ia-institut.fr/ecole-intelligence-artificielle/nous-rencontrer/\"> here</a>"
    ],
    "context_set": ""
 },
- {
-   "tag": "document",
-   "patterns": [
-      "document to bring",
-      "documents needed for admision",
-      "documents needed at the time of admission",
-      "documents needed during admission",
-      "documents required for admision",
-      "documents required at the time of admission",
-      "documents required during admission",
-      "What document are required for admission",
-      "Which document to bring for admission",
-      "documents",
-      "what documents do i need",
-      "what documents do I need for admission",
-      "documents needed"
-   ],
-   "responses": [
-      "To know more about document required visit <a target=\"_blank\" href=\"ADD LINK OF ADMISSION GUIDANCE DOCUMENT FROM YOUR UNIVERSITY WEBSITE\"> here</a>"
-   ],
-   "context_set": ""
-},
+ 
  {
    "tag": "floors",
    "patterns": [
       "size of campus",
       "building size",
-      "How many floors does college have",
-      "floors in college",
-      "floors in college",
-      "how tall is UNI's College of Engineering college building",
+      "How many floors does university have",
+      "floors in university",
+      "floors in university",
+      "how tall is UNI's university of Engineering university building",
       "floors"
    ],
    "responses": [
-      "My College has total 2 floors "
+      "The university has 2 locals "
    ],
    "context_set": ""
 },
@@ -334,10 +261,11 @@
       "timetable",
       "what is IT syllabus",
       "syllabus",
-      "What is next lecture"
+      "What is next lecture",
+   "what is program of IA Institut"
    ],
    "responses": [
-      "Timetable provide direct to the students OR To know about syllabus visit <a target=\"_blank\" href=\"TIMETABLE LINK\"> here</a>"
+      "Timetable provide direct to the students OR To know about syllabus visit <a target=\"_blank\" href=\"https://www.ia-institut.fr/ecole-intelligence-artificielle/\"> here</a>"
    ],
    "context_set": ""
 },
@@ -348,8 +276,8 @@
       "library facility",
       "library facilities",
       "do you have library",
-      "does the college have library facility",
-      "college library",
+      "does the university have library facility",
+      "university library",
       "where can i get books",
       "book facility",
       "Where is library",
@@ -360,16 +288,16 @@
       "how many libraries"
    ],
    "responses": [
-      "There is one huge and spacious library.timings are 8am to 6pm and for more visit <a target=\"blank\" href=\"ADD LIBRARY DETAIL LINK\">here</a>"
+      "There is numerical library..."
    ],
    "context_set": ""
 },
  {
    "tag": "infrastructure",
    "patterns": [
-      "how is college infrastructure",
+      "how is university infrastructure",
       "infrastructure",
-      "college infrastructure"
+      "university infrastructure"
    ],
    "responses": [
       "Our University has Excellent Infrastructure. Campus is clean. Good IT Labs With Good Speed of Internet connection"
@@ -383,8 +311,8 @@
       "canteen facilities",
       "canteen facility",
       "is there any canteen",
-      "Is there a cafetaria in college",
-      "Does college have canteen",
+      "Is there a cafetaria in university",
+      "Does university have canteen",
       "Where is canteen",
       "where is cafetaria",
       "canteen",
@@ -402,8 +330,8 @@
       "food menu",
       "food in canteen",
       "Whats there on menu",
-      "what is available in college canteen",
-      "what foods can we get in college canteen",
+      "what is available in university canteen",
+      "what foods can we get in university canteen",
       "food variety",
       "What is there to eat?"
    ],
@@ -415,18 +343,19 @@
  {
    "tag": "placement",
    "patterns": [
-      "What is college placement",
-      "Which companies visit in college",
+      "What is university placement",
+      "Which companies visit in university",
       "What is average package",
       "companies visit",
       "package",
       "About placement",
       "placement",
       "recruitment",
-      "companies"
+      "companies",
+      "location"
    ],
    "responses": [
-      "To know about placement visit <a target=\"_blank\" href=\"PLACEMENT INFORMATION LINK FROM YOUR UNIVERSITY WEBSITE IF THEY HAVE\">here</a>"
+      "To know about placement visit <a target=\"_blank\" href=\"https://www.ia-institut.fr/ecole-intelligence-artificielle/contact/\">here</a>"
    ],
    "context_set": ""
 },
@@ -475,13 +404,13 @@
       "what is the name of principal",
       "whatv is the principal name",
       "principal name",
-      "Who is college principal",
+      "Who is university principal",
       "Where is principal's office",
       "principal",
       "name of principal"
    ],
    "responses": [
-      "XYZ is college principal and if you need any help then call your branch hod first.That is more appropriate"
+      "XYZ is university principal and if you need any help then call your branch hod first.That is more appropriate"
    ],
    "context_set": ""
 },
@@ -510,13 +439,13 @@
    "patterns": [
       "what is the process of admission",
       "what is the admission process",
-      "How to take admission in your college",
+      "How to take admission in your university",
       "What is the process for admission",
       "admission",
       "admission process"
    ],
    "responses": [
-      "Application can also be submitted online through the Unversity's  <a target=\"_blank\" href=\"LINK OF ADMISSION DOCUMENT\">website</a>"
+      "Application can also be submitted online through the Unversity's  <a target=\"_blank\" href=\"https://www.ia-institut.fr/admission-ecole-ia/pre-candidature/\">website</a>"
    ],
    "context_set": ""
 },
@@ -558,9 +487,9 @@
  {
    "tag": "facilities",
    "patterns": [
-      "What facilities college provide",
-      "College facility",
-      "What are college facilities",
+      "What facilities university provide",
+      "university facility",
+      "What are university facilities",
       "facilities",
       "facilities provided"
    ],
@@ -570,14 +499,14 @@
    "context_set": ""
 },
  {
-   "tag": "college intake",
+   "tag": "university intake",
    "patterns": [
       "max number of students",
       "number of seats per branch",
       "number of seats in each branch",
       "maximum number of seats",
       "maximum students intake",
-      "What is college intake",
+      "What is university intake",
       "how many stundent are taken in each branch",
       "seat allotment",
       "seats"
@@ -590,33 +519,33 @@
  {
    "tag": "uniform",
    "patterns": [
-      "college dress code",
-      "college dresscode",
+      "university dress code",
+      "university dresscode",
       "what is the uniform",
       "can we wear casuals",
-      "Does college have an uniform",
+      "Does university have an uniform",
       "Is there any uniform",
       "uniform",
       "what about uniform",
       "do we have to wear uniform"
    ],
    "responses": [
-      "ENTER YOUR OWN UNIVERSITY UNIFORM CIRCULER"
+      "Just wear something cool and acceptable"
    ],
    "context_set": ""
 },
  {
    "tag": "committee",
    "patterns": [
-      "what are the different committe in college",
-      "different committee in college",
-      "Are there any committee in college",
+      "what are the different committe in university",
+      "different committee in university",
+      "Are there any committee in university",
       "Give me committee details",
       "committee",
-      "how many committee are there in college"
+      "how many committee are there in university"
    ],
    "responses": [
-      "For the various committe in college contact this number: ADD NUMBER"
+      "For the various committe in university contact this number: 0184071646"
    ],
    "context_set": ""
 },
@@ -724,11 +653,13 @@
       "What you can do?",
       "What help you provide?",
       "How you can be helpful?",
-      "What support is offered"
+      "What support is offered",
+      " what do you do",
+      "How do you work"
 
    ],
    "responses": [
-      "I am a general purpose chatbot. My capabilities are : \n 1. I can chat with you. Try asking me for jokes or riddles! \n 2. Ask me about the weather \n 3. I can send an email to however you like \n For suggestions to help me improve, send an email to mohammed.addi@epita.fr . Thank you!! "
+      "I am a general purpose chatbot. My capabilities are : \n 1. I can chat with you. Try asking me for jokes or riddles! \n 2. Ask me about the weather \n 3. I can send an email to however you like \n For suggestions to help me improve, send an email to turbocouscous@gmail.com . Thank you!! "
    ],
    "context_set": ""
 },
@@ -738,7 +669,8 @@
    "patterns": [
       "Tell me a joke",
       "Joke",
-      "Make me laugh"
+      "Make me laugh",
+      "jokes"
 
    ],
    "responses": [
@@ -763,7 +695,9 @@
        "Whats up",
        "Wazzup",
        "How are you",
-       "sup","How you doing"
+       "sup","How you doing",
+       "how are u",
+       "how are y"
    ],
    "responses": [
        "All good..What about you?"
@@ -809,7 +743,8 @@
        "i am good",
        "I'm good",
        "i am fine",
-       " i'm fine","good"
+       " i'm fine","good",
+       "fine"
    ],
    "responses": [
        "Good to know!"
@@ -822,7 +757,7 @@
        "you are useless","useless","suggest","suggestions","you are bad"
    ],
    "responses": [
-       "Please mail your suggestions to mohammed.addi@epita.fr . Thank you for helping me improve!"
+       "Please mail your suggestions to turbocouscous@gmail.com . Thank you for helping me improve!"
    ]
 },
 

@@ -44,6 +44,12 @@
             <artifactId>sendgrid-java</artifactId>
             <version>4.7.1</version> <!-- Check for the latest version on Maven Central -->
         </dependency>
+
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
         <!-- Other dependencies as needed -->
     </dependencies>
 

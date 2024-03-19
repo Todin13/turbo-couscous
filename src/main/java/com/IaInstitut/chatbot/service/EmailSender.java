@@ -7,12 +7,17 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 public class EmailSender {
 
     public static void sendEmailWithSendGrid(String toEmail, String subject, String bodyContent) throws Exception {
-        String apiKey = "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"; // Replace with your actual SendGrid API key
-        Email from = new Email("mohammed29addi@gmail.com"); // Replace with your SendGrid verified sender email
+        if (!isValidEmailAddress(toEmail)) {
+            throw new IllegalArgumentException("Email address is invalid.");
+        }
+        String apiKey = "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"; // Replace with your actual SendGrid API key
+        Email from = new Email("turbocouscous@gmail.com"); // Replace with your SendGrid verified sender email
         Email to = new Email(toEmail);
         Content content = new Content("text/plain", bodyContent);
         Mail mail = new Mail(from, subject, to, content);
@@ -31,5 +36,16 @@ public class EmailSender {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+
+    private static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
     }
 }
