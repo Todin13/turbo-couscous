@@ -7,7 +7,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -22,6 +21,11 @@ public class GmailSend {
 
     public static void sendEmail(String to, String subject, String body) {
         try {
+            if (to.isEmpty() || subject.isEmpty() || body.isEmpty()) {
+                System.out.println("One or more fields (to, subject, body) are empty. Email cannot be sent or saved as draft.");
+                return;
+            }
+
             // Create the email message in the required format
             String emailJson = createEmailJson(to, subject, body);
 
@@ -29,15 +33,11 @@ public class GmailSend {
             System.out.println("Do you want to send the email? (yes/no)");
             Scanner scanner = new Scanner(System.in);
             String response = scanner.nextLine().trim().toLowerCase();
-            
+
             if (response.equals("yes")) {
                 sendEmailViaGmailAPI(emailJson);
-                System.out.println("Email sended.");
-
             } else if (response.equals("no")) {
                 saveEmailAsDraft(emailJson);
-                System.out.println("Email saved as draft.");
-
             } else {
                 System.out.println("Invalid response. Please enter 'yes' or 'no'.");
             }
@@ -48,16 +48,7 @@ public class GmailSend {
 
     private static String createEmailJson(String to, String subject, String body) {
         // Construct the email message in JSON format
-        String emailJson = "{\n" +
-                "  \"raw\": \"" + encodeMessage(to, subject, body) + "\"\n" +
-                "}";
-        return emailJson;
-    }
-
-    private static String encodeMessage(String to, String subject, String body) {
-        // Construct the raw email message and encode it in base64 format
-        String from = "YOUR_EMAIL@gmail.com"; // Replace with your email address
-        String emailContent = "From: " + from + "\r\n" +
+        String emailContent = "From: YOUR_EMAIL@gmail.com\r\n" +
                 "To: " + to + "\r\n" +
                 "Subject: " + subject + "\r\n" +
                 "\r\n" + body;
@@ -74,10 +65,9 @@ public class GmailSend {
         conn.setDoOutput(true);
 
         // Send the email message
-        DataOutputStream outputStream = new DataOutputStream(conn.getOutputStream());
-        outputStream.writeBytes(emailJson);
-        outputStream.flush();
-        outputStream.close();
+        try (DataOutputStream outputStream = new DataOutputStream(conn.getOutputStream())) {
+            outputStream.writeBytes("{ \"raw\": \"" + emailJson + "\" }");
+        }
 
         // Check the response code
         int responseCode = conn.getResponseCode();
@@ -85,14 +75,14 @@ public class GmailSend {
             System.out.println("Email sent successfully!");
         } else {
             // Print error message
-            BufferedReader errorReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-            StringBuilder errorResponse = new StringBuilder();
-            String errorLine;
-            while ((errorLine = errorReader.readLine()) != null) {
-                errorResponse.append(errorLine);
+            try (BufferedReader errorReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()))) {
+                StringBuilder errorResponse = new StringBuilder();
+                String errorLine;
+                while ((errorLine = errorReader.readLine()) != null) {
+                    errorResponse.append(errorLine);
+                }
+                System.err.println("Failed to send email. Error response: " + errorResponse.toString());
             }
-            errorReader.close();
-            System.err.println("Failed to send email. Error response: " + errorResponse.toString());
         }
 
         // Disconnect the connection
@@ -107,29 +97,28 @@ public class GmailSend {
         conn.setRequestProperty("Authorization", "Bearer " + ACCESS_TOKEN);
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setDoOutput(true);
-    
+
         // Send the email message as a draft
-        DataOutputStream outputStream = new DataOutputStream(conn.getOutputStream());
-        outputStream.writeBytes(emailJson);
-        outputStream.flush();
-        outputStream.close();
-    
+        try (DataOutputStream outputStream = new DataOutputStream(conn.getOutputStream())) {
+            outputStream.writeBytes("{ \"message\": { \"raw\": \"" + emailJson + "\" } }");
+        }
+
         // Check the response code
         int responseCode = conn.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             System.out.println("Email saved as draft successfully!");
         } else {
             // Print error message
-            BufferedReader errorReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-            StringBuilder errorResponse = new StringBuilder();
-            String errorLine;
-            while ((errorLine = errorReader.readLine()) != null) {
-                errorResponse.append(errorLine);
+            try (BufferedReader errorReader = new BufferedReader(new InputStreamReader(conn.getErrorStream()))) {
+                StringBuilder errorResponse = new StringBuilder();
+                String errorLine;
+                while ((errorLine = errorReader.readLine()) != null) {
+                    errorResponse.append(errorLine);
+                }
+                System.err.println("Failed to save email as draft. Error response: " + errorResponse.toString());
             }
-            errorReader.close();
-            System.err.println("Failed to save email as draft. Error response: " + errorResponse.toString());
         }
-    
+
         // Disconnect the connection
         conn.disconnect();
     }
@@ -140,6 +129,4 @@ public class GmailSend {
         String body = "This is a test email sent using the Gmail API without external libraries.";
         sendEmail(to, subject, body);
     }
-
-    
 }
