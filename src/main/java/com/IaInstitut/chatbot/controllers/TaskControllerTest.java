@@ -18,7 +18,7 @@ public class TaskControllerTest {
         while (true) {
             System.out.print("User: ");
             String userInput = scanner.nextLine();
-
+            userInput = userInput.trim().replaceAll("\\s+", " ");
             // Check if the user wants to quit the conversation
             if ("quit".equalsIgnoreCase(userInput)) {
                 System.out.println("Chatbot: Goodbye!");

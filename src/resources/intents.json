@@ -12,6 +12,7 @@
       "heyy",
       "whatsup",
       "hey",
+      "yo",
       "??? ??? ??"
    ],
    "responses": [
@@ -815,6 +816,25 @@
    ],
    "context_set": ""
 },
+
+{
+   "tag": "couscous",
+   "patterns": [
+      "couscous recipe",
+      "eat cousous",
+      "prepare couscous",
+      "cook couscous",
+      "prepare a couscous",
+      "prepare the couscous",
+      "cook a couscous",
+      "prepare the couscous"
+   ],
+   "responses": [
+      "To prepare couscous enough for about 4 servings as a side dish.: \n Ingredients:\n - 1 cup of couscous \n - 1 1/4 cups of water or broth (chicken or vegetable for added flavor) \n - 1 tablespoon olive oil or butter \n - Salt, to taste \n - Optional: Vegetables (carrots, zucchini, bell peppers), proteins (chicken, lamb, chickpeas), and spices (cumin, coriander, cinnamon) \n Instructions: \n 1. Prepare the Couscous: \n - In a medium saucepan, bring the water or broth to a boil. Add a pinch of salt and a tablespoon of olive oil or butter. \n - Remove the pan from heat and stir in the couscous. Cover and let it sit for about 5 minutes, or until the liquid is absorbed and the couscous is fluffy. \n 2. Fluff and Season: \n - Using a fork, fluff the couscous to break up any clumps. This is also the time to adjust the seasoning, adding more salt if needed. \n 3. Optional Add-ins: \n - If you’re adding vegetables or protein, you can cook these separately while the couscous is sitting. For vegetables, sauté them in a bit of olive oil until they’re tender. For proteins like chicken or lamb, cook them to your preferred doneness. Chickpeas can be warmed through in a saucepan or in the microwave. \n - Once cooked, mix these add-ins with the fluffy couscous. Add any additional spices at this time as well. \n     "
+   ],
+   "context_set": ""
+},
+
  {
    "tag": "hod",
    "patterns": [
