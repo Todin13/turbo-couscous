@@ -206,7 +206,7 @@ public class agendaGoogle {
             jsonItems.put("nextSyncToken",nextSyncToken);
         }
         if(jsonResponse.contains("\"items\":")){
-            String[] items = jsonResponse.split("\"items\":")[1].split("\"")[1];
+            String items = jsonResponse.split("\"items\":")[1].split("\"")[1];
             if(items.contains("\"kind\":")){
                 String kindItems = items.split("\"kind\":")[1].split("\"")[1];
                 jsonItems.put("kind",kindItems);
