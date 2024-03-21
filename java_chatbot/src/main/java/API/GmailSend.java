@@ -13,10 +13,7 @@ import java.util.Scanner;
 public class GmailSend {
 
     private static final String GMAIL_SEND_ENDPOINT = "https://www.googleapis.com/gmail/v1/users/me/messages/send";
-    private static final GoogleAuth googleAuth = new API.GoogleAuth();
-    private static final String authorizationCode = googleAuth.getAuthenticationCode();
-    private static final Map<String, String> accessToken = googleAuth.getAccessToken(authorizationCode);
-    private static final String ACCESS_TOKEN = accessToken.get("accessToken");
+    private static final String ACCESS_TOKEN = apiController.readToken();
     private static final String GMAIL_DRAFT_ENDPOINT = "https://www.googleapis.com/gmail/v1/users/me/drafts";
 
     public static void sendEmail(String to, String subject, String body) {

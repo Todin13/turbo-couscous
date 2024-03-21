@@ -16,13 +16,10 @@ import java.util.TimeZone;
 public class agendaGoogle {
 
     private static final String GOOGLE_CALENDAR_EVENTS_ENDPOINT = "https://www.googleapis.com/calendar/v3/calendars/primary/events";
-    private static final GoogleAuth googleAuth = new API.GoogleAuth();
-    private static final String authorizationCode = googleAuth.getAuthenticationCode();
-    private static final Map<String, String> accessToken = googleAuth.getAccessToken(authorizationCode);
-    private static final String ACCESS_TOKEN = accessToken.get("accessToken");
+    private static final String ACCESS_TOKEN = apiController.readToken();
     private static final String DEFAULT_TIMEZONE = TimeZone.getDefault().getID();
 
-    public static void addEventToCalendar(String calendarId, String summary, String description, String startDateTime, String endDateTime) {
+    public static void addEventToCalendar(String summary, String description, String startDateTime, String endDateTime) {
         try {
             // Create the event JSON
             String eventJson = createEventJson(summary, description, startDateTime, endDateTime);
@@ -332,7 +329,7 @@ public class agendaGoogle {
         String description = "Discuss project progress and future plans.";
         String startDateTime = "2024-03-23T17:00:00";
         String endDateTime = "2024-03-23T19:00:00";
-        addEventToCalendar(calendarId, summary, description, startDateTime, endDateTime);
+        addEventToCalendar(summary, description, startDateTime, endDateTime);
 
         // showUpcomingEvents(); do not work completly missing the parsing 
     }
