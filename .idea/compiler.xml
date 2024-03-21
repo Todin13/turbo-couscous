@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ChatbotJava" />
+        <module name="chatbotJava" />
       </profile>
     </annotationProcessing>
   </component>
