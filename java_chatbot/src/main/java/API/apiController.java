@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class apiController {
-    
 
     private static void connexion() {
         GoogleAuth googleAuth = new API.GoogleAuth();
