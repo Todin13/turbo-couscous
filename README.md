@@ -11,8 +11,7 @@ This project is in build but we want it to be able to do :
  - [ ] Take voice command
  - [x] Work in English and French
 
-## How does it work :
-### UML Diagram :
+## UML Diagram :
 ### MVC Diagram :
 ![MVC Diagram](https://github.com/Todin13/turbo-couscous/blob/main/preview_img/Java_ChatBot_MVC.png)
 
@@ -21,3 +20,4 @@ This project is in build but we want it to be able to do :
 
 ### Sequence Diagram :
 ![Sequence Diagram](https://github.com/Todin13/turbo-couscous/blob/main/preview_img/Sequence_diagram.png)
+
