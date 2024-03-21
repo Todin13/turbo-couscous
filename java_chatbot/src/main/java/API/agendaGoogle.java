@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TimeZone;
-
+import java.util.List;
+import java.util.ArrayList;
 
 public class agendaGoogle {
 
@@ -31,18 +32,6 @@ public class agendaGoogle {
         }
     }
 
-    public static void removeEventFromCalendar(String eventId) {
-        try {
-            // Construct the URL to delete the event
-            String deleteUrl = GOOGLE_CALENDAR_EVENTS_ENDPOINT + "/" + eventId;
-
-            // Send the request to remove the event from Google Calendar
-            sendRequestToCalendarAPI(deleteUrl, "DELETE", null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private static String createEventJson(String summary, String description, String startDateTime, String endDateTime) {
         return "{\n" +
                 "  \"summary\": \"" + summary + "\",\n" +
@@ -56,6 +45,55 @@ public class agendaGoogle {
                 "    \"timeZone\": \"" + DEFAULT_TIMEZONE + "\"\n" +
                 "  }\n" +
                 "}";
+    }
+
+    public static void removeEventFromCalendarBySummary(Map<String, Object> eventDico, String summary) {
+        // Get the event ID using the summary
+        String eventId = getIdFromSummary(eventDico, summary);
+        
+        if (eventId != null) {
+            try {
+                // If event ID is found, remove the event
+                removeEventFromCalendar(eventId);
+                System.out.println("Event with summary '" + summary + "' has been removed from the calendar.");
+            } catch (NullPointerException e) {
+                // Handle the case where the event ID is not found
+                System.out.println("Event with summary '" + summary + "' not found in the calendar.");
+            } catch (Exception e) {
+                // Handle any other exceptions
+                e.printStackTrace();
+            }
+        }
+    }
+    
+
+    public static void removeEventFromCalendar(String eventId) {
+        try {
+            // Construct the URL to delete the event
+            String deleteUrl = GOOGLE_CALENDAR_EVENTS_ENDPOINT + "/" + eventId;
+
+            // Send the request to remove the event from Google Calendar
+            sendRequestToCalendarAPI(deleteUrl, "DELETE", null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String getIdFromSummary(Map<String, Object> eventDico, String summary) {
+        // Assuming 'item' is a List<Map<String, Object>>
+        @SuppressWarnings("unchecked")
+        List<Map<String, Object>> events = (List<Map<String, Object>>) eventDico.get("item");
+    
+        for (Map<String, Object> event : events) {
+            // Check if the summary matches
+            if (event.get("summary").equals(summary)) {
+                // If a match is found, return the id
+                return (String) event.get("id");
+            }
+        }
+    
+        // If no match is found, return null or throw an exception based on your requirement
+        return null;
     }
     
     private static void sendRequestToCalendarAPI(String urlString, String requestMethod, String requestBody) throws Exception {
@@ -149,7 +187,7 @@ public class agendaGoogle {
 
         Map<String, Object> jsonData = new HashMap<>();
         Map<String, String> jsonDefaultReminders = new HashMap<>();
-        Map<String, Object> jsonAllItem = new HashMap<>();
+        List<Map<String, Object>> jsonAllItem = new ArrayList<>();
         Map<String, String> jsonCreator= new HashMap<>();
         Map<String, String> jsonOrganizer= new HashMap<>();
         Map<String, String> jsonStart= new HashMap<>();
@@ -195,7 +233,6 @@ public class agendaGoogle {
 
         String Items = jsonResponse.split("\"items\":")[1];
         String[] louis = Items.split("\\},  \\{");
-            Integer i=1;
             for(String items : louis) {
 
                 Map<String, Object> jsonItems = new HashMap<>();
@@ -304,8 +341,7 @@ public class agendaGoogle {
                     String eventType = items.split("\"eventType\":")[1].split("\"")[1];       
                     jsonItems.put("eventType",eventType);
                 }
-                jsonAllItem.put("event"+i, jsonItems);
-                i++;
+                jsonAllItem.add(jsonItems);
             }
         
         jsonData.put("item", jsonAllItem);
@@ -317,18 +353,38 @@ public class agendaGoogle {
         
         System.out.println("Upcoming Events:");
         System.out.println("----------------");
-        System.out.println(eventDico);
-
-    }
+        
+        // Assuming 'item' is a List<Map<String, Object>>
+        @SuppressWarnings("unchecked")
+        List<Map<String, Object>> events = (List<Map<String, Object>>) eventDico.get("item");
+        
+        for(Map<String, Object> event : events){
+            System.out.println(event.get("summary"));
+            
+            // Assuming 'start' and 'end' are Maps with a 'dateTime' key
+            @SuppressWarnings("unchecked")
+            Map<String, Object> start = (Map<String, Object>) event.get("start");
+            System.out.println("Start: " + start.get("dateTime"));
+            
+            @SuppressWarnings("unchecked")
+            Map<String, Object> end = (Map<String, Object>) event.get("end");
+            System.out.println("End: " + end.get("dateTime"));
+            
+            System.out.println("----------------");
+        }
+        System.out.println();
+    }   
 
     public static void main(String[] args) {
         // Example usage: Adding an event
-        String summary = "Meeting ";
+        String summary = "Meeting with dad";
         String description = "Discuss project progress and future plans.";
-        String startDateTime = "2024-03-22T09:00:00";
-        String endDateTime = "2024-03-22T10:00:00";
-        //addEventToCalendar(summary, description, startDateTime, endDateTime);
-
-        showUpcomingEvents(); //need better visu
+        String startDateTime = "2024-03-22T19:00:00";
+        String endDateTime = "2024-03-22T21:00:00";
+        addEventToCalendar(summary, description, startDateTime, endDateTime);
+        showUpcomingEvents(); 
+        removeEventFromCalendarBySummary(getUpcomingEvent(), "Meeting with dad");
+        System.out.println();
+        showUpcomingEvents(); 
     }
 }

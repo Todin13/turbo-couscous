@@ -74,17 +74,17 @@ public class apiController {
     }
 
     public static void main(String[] api) {
-        //connexion();
-        String to = "test@gmail.com";
-        String subject = "Test Email";
-        String body = "This is a test email sent using the Gmail API without external libraries.";
-        GmailSend.sendEmail(to, subject, body);
+        connexion();
+        // String to = "test@gmail.com";
+        // String subject = "Test Email";
+        // String body = "This is a test email sent using the Gmail API without external libraries.";
+        // GmailSend.sendEmail(to, subject, body);
 
-        String summary = "Meeting with Client";
-        String description = "Discuss project progress and future plans.";
-        String startDateTime = "2024-03-23T17:00:00";
-        String endDateTime = "2024-03-23T19:00:00";
-        agendaGoogle.addEventToCalendar(summary, description, startDateTime, endDateTime);
+        // String summary = "Meeting with Client";
+        // String description = "Discuss project progress and future plans.";
+        // String startDateTime = "2024-03-23T17:00:00";
+        // String endDateTime = "2024-03-23T19:00:00";
+        // agendaGoogle.addEventToCalendar(summary, description, startDateTime, endDateTime);
 
     }
 }
