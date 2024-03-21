@@ -329,6 +329,6 @@ public class agendaGoogle {
         String endDateTime = "2024-03-22T10:00:00";
         //addEventToCalendar(summary, description, startDateTime, endDateTime);
 
-        showUpcomingEvents(); //do not work completly parsing in progress
+        showUpcomingEvents(); //need better visu
     }
 }
