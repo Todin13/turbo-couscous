@@ -44,7 +44,7 @@ public class ChatbotGUI extends Application {
         VBox mainLayout = new VBox(scrollPane, inputArea);
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
 
-        Scene scene = new Scene(mainLayout, 300, 600);
+        Scene scene = new Scene(mainLayout, 600, 600);
         primaryStage.setTitle("Chatbot");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -69,7 +69,7 @@ public class ChatbotGUI extends Application {
         Label messageLabel = new Label(message);
         messageLabel.setTextFill(Color.WHITE);
         messageLabel.setWrapText(true);
-        messageLabel.setMaxWidth(200);
+        messageLabel.setMaxWidth(900);
         messageLabel.setStyle("-fx-background-color: " + (isUser ? "#8E24AA" : "#7EC8E3") +
                 "; -fx-background-radius: 15; -fx-padding: 10;");
 
