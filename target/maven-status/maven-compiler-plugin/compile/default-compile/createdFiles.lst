@@ -1,8 +1,15 @@
 com\chatbot\OpenAIResponse$Choice.class
 com\chatbot\OpenAIChatbot.class
 com\chatbot\OpenAIResponse$Choice$Message.class
+com\IaInstitut\chatbot\controllers\TaskController.class
 com\chatbot\Main.class
-com\chatbot\ChatMessage.class
 com\chatbot\ChatController.class
+com\IaInstitut\chatbot\controllers\TaskControllerTest.class
+com\IaInstitut\chatbot\model\NlpResult.class
+com\IaInstitut\chatbot\model\NlpEngine.class
+com\IaInstitut\chatbot\controllers\ChatbotGUI.class
+com\chatbot\ChatMessage.class
+com\IaInstitut\chatbot\MainApp.class
 com\chatbot\HttpClientHelper.class
 com\chatbot\OpenAIResponse.class
+com\IaInstitut\chatbot\model\ModelController.class

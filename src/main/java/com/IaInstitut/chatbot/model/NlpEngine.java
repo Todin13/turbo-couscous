@@ -10,6 +10,7 @@ import opennlp.tools.tokenize.TokenizerModel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import com.IaInstitut.chatbot.controllers.OpenAIChatbot;
 
 import java.io.*;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class NlpEngine {
     private Tokenizer tokenizer;
     private POSTaggerME posTagger;
     private JSONObject dataset;
+    private OpenAIChatbot openAIChatbot = new OpenAIChatbot();
 
     public NlpEngine() {
         try {
@@ -35,9 +37,9 @@ public class NlpEngine {
     }
 
     private void initModels() throws IOException {
-        sentenceDetector = new SentenceDetectorME(new SentenceModel(loadModel("C:/Users/HP/Documents/ChatbotJava/src/resources/models/opennlp-en-ud-ewt-sentence-1.0-1.9.3.bin")));
-        tokenizer = new TokenizerME(new TokenizerModel(loadModel("C:/Users/HP/Documents/ChatbotJava/src/resources/models/opennlp-en-ud-ewt-tokens-1.0-1.9.3.bin")));
-        posTagger = new POSTaggerME(new POSModel(loadModel("C:/Users/HP/Documents/ChatbotJava/src/resources/models/opennlp-en-ud-ewt-pos-1.0-1.9.3.bin")));
+        sentenceDetector = new SentenceDetectorME(new SentenceModel(loadModel("src\\resources\\models\\opennlp-en-ud-ewt-sentence-1.0-1.9.3.bin")));
+        tokenizer = new TokenizerME(new TokenizerModel(loadModel("src\\resources\\models\\opennlp-en-ud-ewt-tokens-1.0-1.9.3.bin")));
+        posTagger = new POSTaggerME(new POSModel(loadModel("src\\resources\\models\\opennlp-en-ud-ewt-pos-1.0-1.9.3.bin")));
     }
 
     private InputStream loadModel(String filePath) throws IOException {
@@ -51,7 +53,7 @@ public class NlpEngine {
     private void loadDataset() {
         JSONParser parser = new JSONParser();
         try {
-            dataset = (JSONObject) parser.parse(new FileReader("C:/Users/HP/Documents/ChatbotJava/src/resources/intents.json"));
+            dataset = (JSONObject) parser.parse(new FileReader("src\\resources\\intents.json"));
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to load the dataset.");
@@ -128,7 +130,7 @@ public class NlpEngine {
             }
         }
 
-        return "I'm not sure how to answer that. Can you try asking in a different way?";
+        return openAIChatbot.sendMessage(input);
     }
 
 

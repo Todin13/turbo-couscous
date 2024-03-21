@@ -1,4 +1,4 @@
-package com.chatbot;
+package com.IaInstitut.chatbot.controllers;
 
 import org.apache.http.HttpResponse;
 import java.util.List;

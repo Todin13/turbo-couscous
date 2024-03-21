@@ -1,4 +1,4 @@
-package com.chatbot;
+package com.IaInstitut.chatbot.controllers;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

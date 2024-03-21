@@ -1,4 +1,4 @@
-package com.chatbot;
+package com.IaInstitut.chatbot.controllers;
 
 import java.util.List;
 import java.util.Map;
