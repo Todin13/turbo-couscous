@@ -330,10 +330,10 @@ public class agendaGoogle {
         // Example usage: Adding an event
         String summary = "Meeting with Client";
         String description = "Discuss project progress and future plans.";
-        String startDateTime = "2024-03-20T17:00:00";
-        String endDateTime = "2024-03-20T19:00:00";
-        //addEventToCalendar(calendarId, summary, description, startDateTime, endDateTime);
+        String startDateTime = "2024-03-23T17:00:00";
+        String endDateTime = "2024-03-23T19:00:00";
+        addEventToCalendar(calendarId, summary, description, startDateTime, endDateTime);
 
-        showUpcomingEvents();
+        // showUpcomingEvents(); do not work completly missing the parsing 
     }
 }
