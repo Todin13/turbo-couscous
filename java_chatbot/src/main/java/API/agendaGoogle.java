@@ -231,9 +231,9 @@ public class agendaGoogle {
         jsonData.put("nextSyncToken",nextSyncToken);
         
 
-        String Items = jsonResponse.split("\"items\":")[1];
-        String[] louis = Items.split("\\},  \\{");
-            for(String items : louis) {
+        String allItems = jsonResponse.split("\"items\":")[1];
+        String[] item = allItems.split("\\},  \\{");
+            for(String items : item) {
 
                 Map<String, Object> jsonItems = new HashMap<>();
                 
