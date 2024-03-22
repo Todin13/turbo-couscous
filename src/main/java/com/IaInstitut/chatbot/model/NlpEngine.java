@@ -99,7 +99,12 @@ public class NlpEngine {
                 return "sendEmail";
             } else if (token.toLowerCase().matches("weather|forecast|temperature")) {
                 return "weatherForecast";
+            }else if (token.toLowerCase().matches("calendar")) {
+                return "showAppointmentSummary";
+            } else if (token.toLowerCase().matches("delete event")){
+                return "deleteEvent";
             }
+            
         }
         return "unknown";
     }

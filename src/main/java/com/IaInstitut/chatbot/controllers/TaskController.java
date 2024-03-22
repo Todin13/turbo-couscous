@@ -7,12 +7,16 @@ import com.IaInstitut.chatbot.model.ModelController;
 import com.IaInstitut.chatbot.model.NlpResult;
 import com.IaInstitut.chatbot.API.weatherApi;
 import com.IaInstitut.chatbot.API.GmailSend;
+import com.IaInstitut.chatbot.API.agendaGoogle;
 
 public class TaskController {
     private final ModelController modelController;
     private GmailSend emailSender = new GmailSend(); // Create an instance of the EmailSender class
     private String collectingInfoForEmail = null; // This will be null, "to", "subject", or "body"
     private String to = "", subject = "", body = "";
+    private String collectingInfoForAppointment = null; // This will be null, "summary", "description", "startDateTime", or "endDateTime"
+    private String summary = "", description = "", startDateTime = "", endDateTime = "";
+
 
     public TaskController() {
         this.modelController = new ModelController();
@@ -48,6 +52,62 @@ public class TaskController {
                     collectingInfoForEmail = null; // Reset state in case of an unexpected state
                     return "Unexpected error. Please try to send the email again.";
             }
+        } else if (collectingInfoForAppointment != null) {
+            switch (collectingInfoForAppointment) {
+                case "summary":
+                    summary = userInput;
+                    collectingInfoForAppointment = "description";
+                    return "Please enter the appointment description:";
+                case "description":
+                    description = userInput;
+                    collectingInfoForAppointment = "startDateTime";
+                    return "Please enter the appointment start date and time (e.g., 2024-03-22T10:00:00):";
+                case "startDateTime":
+                    startDateTime = userInput;
+                    collectingInfoForAppointment = "endDateTime";
+                    return "Please enter the appointment end date and time (e.g., 2024-03-22T11:00:00):";
+                case "endDateTime":
+                    endDateTime = userInput;
+                    collectingInfoForAppointment = null; // We've collected all information, reset the state
+                    
+                    try {
+                        com.IaInstitut.chatbot.API.agendaGoogle.addEventToCalendar(summary, description, startDateTime, endDateTime);
+                        response = "Appointment scheduled successfully.";
+                    } catch (Exception e) {
+                        response = "Failed to schedule the appointment: " + e.getMessage();
+                    }
+                    // Reset appointment details for next use
+                    summary = "";
+                    description = "";
+                    startDateTime = "";
+                    endDateTime = "";
+                    return response;
+                default:
+                    collectingInfoForAppointment = null; // Reset state in case of an unexpected error
+                    return "Unexpected error. Please try scheduling the appointment again.";
+            }
+        } else if ("scheduleAppointment".equals(nlpResult.getIntent())) {
+            collectingInfoForAppointment = "summary"; // Begin collecting information for scheduling an appointment
+            return "Please enter the appointment summary:";
+        }
+        
+        
+        if ("deleteEvent".equals(nlpResult.getIntent())) {
+            String eventSummary = extractSummaryFromUserInput(userInput);
+            if (eventSummary != null && !eventSummary.isEmpty()) {
+                // Call the method to delete the event from the calendar by summary
+                boolean deleted = agendaGoogle.removeEventFromCalendarBySummary(agendaGoogle.getUpcomingEvent(), eventSummary);
+                if (deleted) {
+                    response = "Event deleted successfully.";
+                } else {
+                    response = "Event with the specified summary not found.";
+                }
+            } else {
+                response = "Please specify the event summary to delete.";
+            }
+        } else if ("showAppointmentSummary".equals(nlpResult.getIntent())) {
+            // Assuming agendaGoogle.showUpcomingEvents() now returns a String
+            response = agendaGoogle.showUpcomingEvents();
         }
         
 
@@ -62,9 +122,14 @@ public class TaskController {
                 
 
                 case "scheduleAppointment":
-                    response = "Not Implemented Yet";
+                        response = "Not Implemented Yet"; // Placeholder response for "scheduleAppointment
                     break;
-
+                
+                    case "showAppointmentSummary":
+                    // Execute the method to get and show the upcoming events
+                    // Make sure this method prints the event summary
+                    response =  agendaGoogle.showUpcomingEvents();;
+                    break;
 
                     case "weatherForecast":
                     // Assuming IPandLocationResolver and weatherApi are properly set up
@@ -75,10 +140,10 @@ public class TaskController {
                     // Assume that the weather forecast data is a Map with keys as timestamps
                     Map<String, Map<String, String>> weatherForecast = weatherApi.getWeatherForecast(latitude, longitude);
 
-// Print the forecast for debugging purposes
+                    // Print the forecast for debugging purposes
                     System.out.println("Weather Forecast Map: " + weatherForecast);
 
-// Attempt to find the current weather details
+                    // Attempt to find the current weather details
                     String currentWeatherKey = findCurrentWeatherKey(weatherForecast);
                     if (currentWeatherKey != null) {
                         Map<String, String> currentWeather = weatherForecast.get(currentWeatherKey);
@@ -114,6 +179,15 @@ public class TaskController {
         if (weatherForecast != null && !weatherForecast.isEmpty()) {
             // You can also add more logic here to find the exact key for the current time
             return weatherForecast.keySet().iterator().next();
+        }
+        return null;
+    }
+    private String extractSummaryFromUserInput(String userInput) {
+        // Simplified extraction logic
+        String keyword = "Delete event:";
+        int startIndex = userInput.indexOf(keyword);
+        if (startIndex != -1) {
+            return userInput.substring(startIndex + keyword.length()).trim();
         }
         return null;
     }

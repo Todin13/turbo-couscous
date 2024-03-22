@@ -44,7 +44,7 @@ public class agendaGoogle {
                 "}";
     }
 
-    public static void removeEventFromCalendarBySummary(Map<String, Object> eventDico, String summary) {
+    public static boolean removeEventFromCalendarBySummary(Map<String, Object> eventDico, String summary) {
         // Get the event ID using the summary
         String eventId = getIdFromSummary(eventDico, summary);
         
@@ -53,14 +53,19 @@ public class agendaGoogle {
                 // If event ID is found, remove the event
                 removeEventFromCalendar(eventId);
                 System.out.println("Event with summary '" + summary + "' has been removed from the calendar.");
+                return true;
             } catch (NullPointerException e) {
                 // Handle the case where the event ID is not found
                 System.out.println("Event with summary '" + summary + "' not found in the calendar.");
+                return false;
             } catch (Exception e) {
                 // Handle any other exceptions
                 e.printStackTrace();
+                return false;
             }
         }
+        return false;
+       
     }
     
 
@@ -125,11 +130,11 @@ public class agendaGoogle {
         conn.disconnect();
     }
 
-    public static void showUpcomingEvents() {
+    public static String showUpcomingEvents() {
 
         Map<String, Object> upComingEvent = getUpcomingEvent();
 
-        DisplayEvents(upComingEvent);
+        return DisplayEvents(upComingEvent);
     }
 
     public static Map<String, Object> getUpcomingEvent() {
@@ -346,31 +351,33 @@ public class agendaGoogle {
         return jsonData;
     }
 
-    private static void DisplayEvents(Map<String, Object> eventDico) {
-        
-        System.out.println("Upcoming Events:");
-        System.out.println("----------------");
+    private static String DisplayEvents(Map<String, Object> eventDico) {
+        StringBuilder eventsSummary = new StringBuilder();
+        eventsSummary.append("Upcoming Events:\n");
+        eventsSummary.append("----------------\n");
         
         // Assuming 'item' is a List<Map<String, Object>>
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> events = (List<Map<String, Object>>) eventDico.get("item");
         
-        for(Map<String, Object> event : events){
-            System.out.println(event.get("summary"));
+        for(Map<String, Object> event : events) {
+            eventsSummary.append(event.get("summary")).append("\n");
             
             // Assuming 'start' and 'end' are Maps with a 'dateTime' key
             @SuppressWarnings("unchecked")
             Map<String, Object> start = (Map<String, Object>) event.get("start");
-            System.out.println("Start: " + start.get("dateTime"));
+            eventsSummary.append("Start: ").append(start.get("dateTime")).append("\n");
             
             @SuppressWarnings("unchecked")
             Map<String, Object> end = (Map<String, Object>) event.get("end");
-            System.out.println("End: " + end.get("dateTime"));
+            eventsSummary.append("End: ").append(end.get("dateTime")).append("\n");
             
-            System.out.println("----------------");
+            eventsSummary.append("----------------\n");
         }
-        System.out.println();
-    }   
+        
+        return eventsSummary.toString();
+    }
+    
 
     public static void main(String[] args) {
         // Example usage: Adding an event
