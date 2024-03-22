@@ -18,7 +18,7 @@ Fisrt you have to copy the repo and have java javafx installed and configured an
 You can ask any qyestion to the chatbot it will answer if it can. \
 To send an email you must write ```email``` or ```send email``` or ```i want to send an email``` \
 To show the calendar you have to write ```calendar summary``` \
-To add an event in the calendar type ```add event``` \
+To add an event in the calendar type ```add event``` 
 
 ## UML Diagram :
 ### MVC Diagram :
