@@ -1,4 +1,4 @@
-package API;
+package com.IaInstitut.chatbot.API;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -7,7 +7,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.Map;
 import java.util.Scanner;
 
 public class GmailSend {
@@ -43,7 +42,7 @@ public class GmailSend {
         }
     }
 
-    private static String createEmailJson(String to, String subject, String body) {
+    public static String createEmailJson(String to, String subject, String body) {
         // Construct the email message in JSON format
         String emailContent = "From: YOUR_EMAIL@gmail.com\r\n" +
                 "To: " + to + "\r\n" +
@@ -52,7 +51,7 @@ public class GmailSend {
         return Base64.getUrlEncoder().encodeToString(emailContent.getBytes(StandardCharsets.UTF_8));
     }
 
-    private static void sendEmailViaGmailAPI(String emailJson) throws Exception {
+    public static void sendEmailViaGmailAPI(String emailJson) throws Exception {
         // Create a connection to the Gmail API endpoint
         URL url = new URL(GMAIL_SEND_ENDPOINT);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

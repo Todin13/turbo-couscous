@@ -1,4 +1,4 @@
-package API;
+package com.IaInstitut.chatbot.API;
 
 import java.io.BufferedReader;
 import java.io.IOException;

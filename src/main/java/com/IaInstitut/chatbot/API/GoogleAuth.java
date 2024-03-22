@@ -1,4 +1,4 @@
-package API;
+package com.IaInstitut.chatbot.API;
 
 import java.awt.Desktop;
 import java.io.BufferedReader;
@@ -50,7 +50,6 @@ public class GoogleAuth {
     
                 // Parse JSON response to get access token
                 String jsonResponse = response.toString();
-                int tokenIndex = jsonResponse.indexOf("\"access_token\":\"");
                 
                 if (jsonResponse.contains("\"access_token\":")) {
                     String accessToken = jsonResponse.split("\"access_token\":")[1].split("\"")[1];

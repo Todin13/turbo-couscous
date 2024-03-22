@@ -1,4 +1,4 @@
-package API;
+package com.IaInstitut.chatbot.API;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,8 +11,8 @@ import java.util.HashMap;
 
 public class apiController {
 
-    private static void connexion() {
-        GoogleAuth googleAuth = new API.GoogleAuth();
+    public static void connexion() {
+        GoogleAuth googleAuth = new com.IaInstitut.chatbot.API.GoogleAuth();
         String authorizationCode = googleAuth.getAuthenticationCode();
         Map<String, String> accessInfo = googleAuth.getAccessToken(authorizationCode);
 

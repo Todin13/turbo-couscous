@@ -1,15 +1,12 @@
-package API;
+package com.IaInstitut.chatbot.API;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.TimeZone;
 import java.util.List;
 import java.util.ArrayList;

@@ -8,15 +8,18 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import com.IaInstitut.chatbot.API.apiController;
 
 public class ChatbotGUI extends Application {
 
     private TaskController taskController = new TaskController();
     private VBox chatPane;
     private ScrollPane scrollPane;
+    private apiController apiController = new apiController();
 
     @Override
     public void start(Stage primaryStage) {
+        apiController.connexion();
         chatPane = new VBox(10);
         chatPane.setPadding(new Insets(10));
         chatPane.setFillWidth(true);
