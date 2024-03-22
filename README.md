@@ -21,3 +21,5 @@ This project is in build but we want it to be able to do :
 ### Sequence Diagram :
 ![Sequence Diagram](https://github.com/Todin13/turbo-couscous/blob/main/preview_img/Sequence_diagram.png)
 
+## Separation of workload :
+![Digramm of workload](https://github.com/Todin13/turbo-couscous/blob/main/preview_img/work.png)
